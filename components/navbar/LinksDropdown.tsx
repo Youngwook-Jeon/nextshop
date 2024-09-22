@@ -1,5 +1,6 @@
 import { LuAlignLeft } from "react-icons/lu";
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 
 import {
@@ -15,6 +16,8 @@ import UserIcon from "./UserIcon";
 import SignOutLink from "./SignOutLink";
 
 export default function LinksDropdown() {
+  const { userId } = auth();
+  const isAdmin = userId === process.env.ADMIN_USER_ID;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,6 +42,7 @@ export default function LinksDropdown() {
         </SignedOut>
         <SignedIn>
           {links.map((link) => {
+            if (link.label === "dashboard" && !isAdmin) return null;
             return (
               <DropdownMenuItem key={link.href}>
                 <Link href={link.href} className="capitalize w-full">
