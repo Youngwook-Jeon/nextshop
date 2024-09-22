@@ -1,3 +1,5 @@
+"use server";
+
 import db from "@/utils/db";
 import { redirect } from "next/navigation";
 
@@ -35,4 +37,13 @@ export const fetchSingleProduct = async (productId: string) => {
   if (!product) redirect("/products");
 
   return product;
+};
+
+export const createProductAction = async (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  prevState: any,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  formData: FormData
+): Promise<{ message: string }> => {
+  return { message: "Product is created" };
 };
