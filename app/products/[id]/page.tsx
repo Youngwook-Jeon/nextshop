@@ -7,6 +7,8 @@ import ProductRating from "@/components/single-product/ProductRating";
 import { fetchSingleProduct } from "@/utils/actions";
 import { formatCurrency } from "@/utils/format";
 import ShareButton from "@/components/single-product/ShareButton";
+import ProductReviews from '@/components/reviews/ProductReviews';
+import SubmitReview from "@/components/reviews/SubmitReview";
 
 export default async function SingleProduct({
   params,
@@ -49,6 +51,9 @@ export default async function SingleProduct({
           <AddToCart productId={params.id} />
         </div>
       </div>
+
+      <ProductReviews productId={params.id} />
+      <SubmitReview productId={params.id} />
     </section>
   );
 }
